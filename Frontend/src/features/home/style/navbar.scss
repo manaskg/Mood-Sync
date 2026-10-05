@@ -1,0 +1,98 @@
+@use "../../shared/styles/variables" as *;
+
+.moodify-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(8, 10, 15, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.85rem 1.5rem;
+  transition: all 0.3s ease;
+
+  .moodify-navbar__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .moodify-navbar__center {
+    display: flex;
+    align-items: center;
+
+    .mood-indicator-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-primary);
+
+      .mood-indicator-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        box-shadow: 0 0 8px currentColor;
+      }
+
+      .mood-emoji {
+        font-size: 0.95rem;
+      }
+
+      .mood-text {
+        letter-spacing: 0.01em;
+      }
+    }
+  }
+
+  .moodify-navbar__right {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+
+    .user-profile-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      padding: 0.35rem 0.85rem 0.35rem 0.45rem;
+      border-radius: var(--radius-full);
+
+      .user-avatar {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: var(--bg-elevated);
+        border: 1px solid var(--border-subtle);
+        color: var(--accent-current);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .username {
+        font-size: 0.84rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        max-width: 120px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .moodify-navbar__center {
+    display: none !important;
+  }
+}

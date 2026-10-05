@@ -1,0 +1,7 @@
+UI ==> UI dikhana aur navigation handle [pages, component]
+
+hook ==> state and api manage kena [hooks]
+
+state ==> data store [auth.context.jsx, posts.context.jsx]
+
+API ==> dackend se communicate krne ke liye [services/auth.api.js]

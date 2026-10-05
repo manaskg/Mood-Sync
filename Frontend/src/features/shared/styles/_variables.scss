@@ -1,0 +1,61 @@
+// Design System Tokens - Moodify
+:root {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  // Obsidian Dark Theme
+  --bg-app: #080a0f;
+  --bg-surface: #0f141f;
+  --bg-card: rgba(22, 29, 43, 0.75);
+  --bg-card-hover: rgba(30, 39, 58, 0.9);
+  --bg-input: #121824;
+  --bg-elevated: #1a2336;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.14);
+  --border-strong: rgba(255, 255, 255, 0.22);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverse: #080a0f;
+
+  // Mood Accents
+  --mood-happy: #f59e0b;
+  --mood-happy-rgb: 245, 158, 11;
+  --mood-sad: #38bdf8;
+  --mood-sad-rgb: 56, 189, 248;
+  --mood-surprised: #c084fc;
+  --mood-surprised-rgb: 192, 132, 252;
+
+  // Dynamic Current Mood Accent (default happy)
+  --accent-current: var(--mood-happy);
+  --accent-current-rgb: var(--mood-happy-rgb);
+  --accent-glow: rgba(var(--accent-current-rgb), 0.25);
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  --shadow-floating: 0 20px 45px -15px rgba(0, 0, 0, 0.7), 0 0 1px rgba(255, 255, 255, 0.15) inset;
+}
+
+[data-mood="happy"] {
+  --accent-current: var(--mood-happy);
+  --accent-current-rgb: var(--mood-happy-rgb);
+  --accent-glow: rgba(245, 158, 11, 0.25);
+}
+
+[data-mood="sad"] {
+  --accent-current: var(--mood-sad);
+  --accent-current-rgb: var(--mood-sad-rgb);
+  --accent-glow: rgba(56, 189, 248, 0.25);
+}
+
+[data-mood="surprised"] {
+  --accent-current: var(--mood-surprised);
+  --accent-current-rgb: var(--mood-surprised-rgb);
+  --accent-glow: rgba(192, 132, 252, 0.25);
+}
