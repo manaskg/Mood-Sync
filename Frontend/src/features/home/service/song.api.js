@@ -1,8 +1,18 @@
 import axios from "axios";
 
+const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 export const songApi = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL,
   withCredentials: true,
+});
+
+songApi.interceptors.request.use((config) => {
+  const token = localStorage.getItem("moodify_token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
 export async function getSong({ mood }) {

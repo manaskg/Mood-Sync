@@ -1,8 +1,18 @@
 import axios from "axios";
 
+const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 export const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL,
   withCredentials: true,
+});
+
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("moodify_token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
 export async function register({ username, email, password }) {
@@ -11,6 +21,9 @@ export async function register({ username, email, password }) {
     email,
     password,
   });
+  if (response.data?.token) {
+    localStorage.setItem("moodify_token", response.data.token);
+  }
   return response.data;
 }
 
@@ -20,6 +33,9 @@ export async function login({ email, password, username }) {
     password,
     username,
   });
+  if (response.data?.token) {
+    localStorage.setItem("moodify_token", response.data.token);
+  }
   return response.data;
 }
 
@@ -29,6 +45,12 @@ export async function getMe() {
 }
 
 export async function logout() {
-  const response = await api.get("/api/auth/logout");
-  return response.data;
+  try {
+    const response = await api.get("/api/auth/logout");
+    localStorage.removeItem("moodify_token");
+    return response.data;
+  } catch (e) {
+    localStorage.removeItem("moodify_token");
+    return { success: true };
+  }
 }

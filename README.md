@@ -223,6 +223,45 @@ cd Moodify
 
 ---
 
+## 🚀 Cloud Deployment Guide
+
+### **A. Deploying the Backend on Render**
+1. Push your repository to GitHub.
+2. Log in to [Render](https://render.com/) and click **New +** → **Web Service**.
+3. Connect your GitHub repository.
+4. Configure the Web Service settings:
+   * **Name**: `moodify-backend` (or your choice)
+   * **Root Directory**: `Backend`
+   * **Runtime**: `Node`
+   * **Build Command**: `npm install`
+   * **Start Command**: `npm start`
+5. Under **Environment Variables**, add:
+   * `MONGO_URI` = your MongoDB connection string
+   * `JWT_SECRET` = your secret JWT key
+   * `REDIS_HOST` = your Redis host
+   * `REDIS_PORT` = `15625` (or your port)
+   * `REDIS_PASSWORD` = your Redis password
+   * `IMAGEKIT_PRIVATE_KEY` = your ImageKit private key
+   * `NODE_ENV` = `production`
+   * `FRONTEND_URL` = your Netlify URL (e.g., `https://your-app.netlify.app`)
+6. Click **Deploy Web Service** and copy your backend URL (e.g., `https://moodify-backend.onrender.com`).
+
+---
+
+### **B. Deploying the Frontend on Netlify**
+1. Log in to [Netlify](https://www.netlify.com/) and click **Add new site** → **Import an existing project**.
+2. Connect your GitHub repository.
+3. Configure the Build Settings:
+   * **Base directory**: `Frontend`
+   * **Build command**: `npm run build`
+   * **Publish directory**: `Frontend/dist` (or `dist`)
+4. Under **Site configuration** → **Environment variables**, add:
+   * `VITE_API_URL` = your Render backend URL (e.g., `https://moodify-backend.onrender.com`)
+5. Click **Deploy site**.
+6. Once deployed, Netlify will generate your live URL (e.g., `https://moodify-audio.netlify.app`). SPA route redirects are automatically handled by [`netlify.toml`](file:///c:/My%20Portfolio%20Projects/Moodify/Frontend/netlify.toml) and [`_redirects`](file:///c:/My%20Portfolio%20Projects/Moodify/Frontend/public/_redirects).
+
+---
+
 ## 📄 License
 
 This project is licensed under the [ISC License](LICENSE).
@@ -233,3 +272,4 @@ This project is licensed under the [ISC License](LICENSE).
 
 Created by **Manas Ghosh** as a full-stack portfolio showcase.
 Feel free to connect on [LinkedIn](https://linkedin.com/) or check out my other repositories on [GitHub](https://github.com/)!
+

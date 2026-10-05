@@ -36,10 +36,18 @@ async function registerUser(req, res) {
     },
   );
 
-  res.cookie("token", token);
+  const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    maxAge: 3 * 24 * 60 * 60 * 1000,
+  };
+
+  res.cookie("token", token, cookieOptions);
 
   return res.status(201).json({
     message: "User registered successfully",
+    token,
     user: {
       id: user._id,
       username: user.username,
@@ -82,10 +90,18 @@ async function loginUser(req, res) {
     },
   );
 
-  res.cookie("token", token);
+  const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    maxAge: 3 * 24 * 60 * 60 * 1000,
+  };
+
+  res.cookie("token", token, cookieOptions);
 
   return res.status(200).json({
     message: "User logged in successfully",
+    token,
     user: {
       id: user._id,
       username: user.username,
@@ -120,11 +136,17 @@ async function getMe(req, res) {
 }
 
 async function logoutUser(req, res) {
-  const token = req.cookies.token;
+  const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
 
-  res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  });
 
-  await redis.set(token, Date.now().toString(), "EX", 60 * 60);
+  if (token) {
+    await redis.set(token, Date.now().toString(), "EX", 60 * 60);
+  }
 
   res.status(200).json({
     message: "logout successfully",
