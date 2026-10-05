@@ -8,7 +8,7 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("moodify_token");
+  const token = localStorage.getItem("moodsync_token") || localStorage.getItem("moodify_token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -22,7 +22,7 @@ export async function register({ username, email, password }) {
     password,
   });
   if (response.data?.token) {
-    localStorage.setItem("moodify_token", response.data.token);
+    localStorage.setItem("moodsync_token", response.data.token);
   }
   return response.data;
 }
@@ -34,7 +34,7 @@ export async function login({ email, password, username }) {
     username,
   });
   if (response.data?.token) {
-    localStorage.setItem("moodify_token", response.data.token);
+    localStorage.setItem("moodsync_token", response.data.token);
   }
   return response.data;
 }
@@ -47,9 +47,11 @@ export async function getMe() {
 export async function logout() {
   try {
     const response = await api.get("/api/auth/logout");
+    localStorage.removeItem("moodsync_token");
     localStorage.removeItem("moodify_token");
     return response.data;
   } catch (e) {
+    localStorage.removeItem("moodsync_token");
     localStorage.removeItem("moodify_token");
     return { success: true };
   }

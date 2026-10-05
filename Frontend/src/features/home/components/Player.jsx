@@ -146,7 +146,7 @@ const Player = () => {
           <div className="player-track__info">
             <h3 className="player-track__title">{song.title}</h3>
             <div className="player-track__meta">
-              <span className="player-track__artist">{song.artist || "Moodify Curated"}</span>
+              <span className="player-track__artist">{song.artist || "MoodSync Curated"}</span>
               <span className="player-track__mood-badge capitalize">{song.mood}</span>
             </div>
           </div>

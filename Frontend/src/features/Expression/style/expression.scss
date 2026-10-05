@@ -48,19 +48,11 @@
       border-radius: var(--radius-full);
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border-subtle);
-      font-size: 0.76rem;
+      font-size: 0.74rem;
       font-family: var(--font-mono);
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: var(--accent-current);
-
-      .status-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background-color: var(--accent-current);
-        box-shadow: 0 0 8px var(--accent-current);
-      }
+      color: var(--text-secondary);
     }
   }
 
@@ -155,45 +147,6 @@
       p {
         font-size: 0.84rem;
         max-width: 320px;
-      }
-    }
-
-    .expression-banner {
-      position: absolute;
-      bottom: 14px;
-      left: 14px;
-      right: 14px;
-      background: rgba(15, 20, 31, 0.85);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--border-light);
-      border-radius: var(--radius-sm);
-      padding: 0.65rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-
-      .expression-tag {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-
-        .emoji-circle {
-          font-size: 1.25rem;
-        }
-
-        .mood-name {
-          font-weight: 700;
-          font-size: 0.98rem;
-          color: var(--text-primary);
-          text-transform: capitalize;
-        }
-
-        .vibe-tag {
-          font-size: 0.75rem;
-          color: var(--text-muted);
-          font-family: var(--font-mono);
-        }
       }
     }
   }

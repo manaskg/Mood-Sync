@@ -1,0 +1,410 @@
+@use "../../shared/styles/variables" as *;
+
+.landing-page {
+  min-height: 100dvh;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+
+  // Background SVG Graphic
+  .landing-bg-graphic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 700px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.45;
+  }
+
+  // Navigation Bar
+  .landing-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(8, 10, 15, 0.8);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 1rem 2rem;
+
+    .landing-nav__inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .landing-nav__links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+
+      a {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.15s ease;
+
+        &:hover {
+          color: var(--text-primary);
+        }
+      }
+    }
+
+    .landing-nav__actions {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+  }
+
+  // Hero Section
+  .landing-hero {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(3.5rem, 8vw, 6rem) 1.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+
+    .landing-hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      padding: 0.4rem 0.95rem;
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+    }
+
+    .landing-hero__title {
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+      max-width: 18ch;
+      color: #ffffff;
+
+      span {
+        color: var(--accent-current);
+      }
+    }
+
+    .landing-hero__subtext {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--text-secondary);
+      max-width: 54ch;
+      line-height: 1.55;
+    }
+
+    .landing-hero__cta-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  // Frequency Wave Canvas / SVG Bar
+  .landing-wave-strip {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    width: 100%;
+    margin: 1rem auto 3rem;
+    padding: 0 1.5rem;
+
+    .wave-container {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .wave-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        letter-spacing: 0.06em;
+      }
+
+      .svg-waveform {
+        width: 100%;
+        height: 64px;
+        overflow: visible;
+
+        path {
+          stroke-dasharray: 6;
+          animation: wavePulse 20s linear infinite;
+        }
+      }
+    }
+  }
+
+  // Curated Moods Section
+  .landing-moods {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .section-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+
+      h2 {
+        font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--text-primary);
+      }
+
+      p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        max-width: 50ch;
+      }
+    }
+
+    .moods-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+
+      .mood-card {
+        background: var(--bg-card);
+        backdrop-filter: blur(16px);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: 1.6rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+        &:hover {
+          background: var(--bg-card-hover);
+          border-color: var(--border-light);
+          transform: translateY(-3px);
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        &--happy {
+          border-top: 3px solid var(--mood-happy);
+        }
+
+        &--sad {
+          border-top: 3px solid var(--mood-sad);
+        }
+
+        &--surprised {
+          border-top: 3px solid var(--mood-surprised);
+        }
+
+        .mood-card__top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .mood-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+          }
+
+          .mood-badge {
+            font-size: 0.74rem;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            padding: 0.2rem 0.55rem;
+            border-radius: var(--radius-full);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+          }
+        }
+
+        .mood-card__desc {
+          font-size: 0.88rem;
+          color: var(--text-secondary);
+          line-height: 1.45;
+        }
+
+        .mood-card__tracklist {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          padding-top: 0.5rem;
+          border-top: 1px solid var(--border-subtle);
+
+          .track-sample {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+
+            strong {
+              color: var(--text-primary);
+              font-weight: 500;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Architecture & How it works
+  .landing-steps {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+
+      .step-box {
+        background: rgba(15, 20, 31, 0.6);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-md);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+
+        .step-index {
+          font-family: var(--font-mono);
+          font-size: 0.8rem;
+          font-weight: 600;
+          color: var(--accent-current);
+        }
+
+        h3 {
+          font-size: 1.15rem;
+          font-weight: 700;
+          color: var(--text-primary);
+        }
+
+        p {
+          font-size: 0.88rem;
+          color: var(--text-secondary);
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+
+  // Final CTA banner
+  .landing-banner {
+    position: relative;
+    z-index: 1;
+    max-width: 1000px;
+    width: 100%;
+    margin: 2rem auto 5rem;
+    padding: 0 1.5rem;
+
+    .banner-inner {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: clamp(2rem, 5vw, 3.5rem);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+
+      h2 {
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        font-weight: 700;
+        color: var(--text-primary);
+        max-width: 24ch;
+      }
+
+      p {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        max-width: 48ch;
+      }
+    }
+  }
+
+  // Footer
+  .landing-footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border-subtle);
+    padding: 2rem 1.5rem;
+    background: rgba(8, 10, 15, 0.95);
+
+    .landing-footer__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+
+      p {
+        font-size: 0.82rem;
+        color: var(--text-muted);
+      }
+    }
+  }
+}
+
+@keyframes wavePulse {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 1000;
+  }
+}
+
+@media (max-width: 768px) {
+  .landing-page .landing-nav .landing-nav__links {
+    display: none;
+  }
+}

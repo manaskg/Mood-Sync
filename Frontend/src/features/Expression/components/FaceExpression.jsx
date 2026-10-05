@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { detect, init } from "../utils/utils";
-import { Camera, CameraSlash, Sparkle, Scan, Smiley, SmileySad, Lightning } from "@phosphor-icons/react";
+import { Camera, CameraSlash, Scan, Smiley, SmileySad, Lightning } from "@phosphor-icons/react";
 import "../style/expression.scss";
 
 export default function FaceExpression({ activeMood = "happy", onMoodDetected = () => {} }) {
@@ -151,18 +151,17 @@ export default function FaceExpression({ activeMood = "happy", onMoodDetected = 
       <header className="expression-studio__header">
         <div className="expression-studio__title-wrap">
           <h2>
-            <Sparkle size={20} weight="fill" color="var(--accent-current)" />
-            AI Facial Emotion Scanner
+            <Scan size={20} weight="bold" />
+            Facial Emotion Scanner
           </h2>
-          <p>Analyzing facial micro-gestures to curate your soundtrack</p>
+          <p>On-device facial analysis to select your playlist</p>
         </div>
         <div className="expression-studio__status-badge">
-          <span className="status-dot"></span>
-          <span>{cameraActive && !cameraError ? "Vision Sensor Active" : "Manual Mode"}</span>
+          <span>{cameraActive && !cameraError ? "Camera Online" : "Manual Mode"}</span>
         </div>
       </header>
 
-      {/* Camera Viewport with HUD reticle */}
+      {/* Camera Viewport with clean HUD frame */}
       <div className="expression-studio__viewport-wrapper">
         {cameraActive && !cameraError ? (
           <>
@@ -182,21 +181,10 @@ export default function FaceExpression({ activeMood = "happy", onMoodDetected = 
             <p>
               {cameraError
                 ? "Camera permission blocked or unavailable. You can use the instant mood selector below."
-                : "Camera is currently paused. Toggle on to re-enable live AI facial tracking."}
+                : "Camera is currently paused. Toggle on to re-enable live facial tracking."}
             </p>
           </div>
         )}
-
-        {/* Emotion Banner over camera */}
-        <div className="expression-banner">
-          <div className="expression-tag">
-            <span className="emoji-circle">{getMoodEmoji(expression)}</span>
-            <div>
-              <span className="mood-name">{expression} Emotion</span>
-              <p className="vibe-tag">{getMoodVibe(expression)}</p>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Real-time telemetry metrics */}

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSong } from "../hooks/useSong";
-import { ClockCountdown, Sparkle } from "@phosphor-icons/react";
+import { ClockCountdown } from "@phosphor-icons/react";
 
 export default function MoodHistory() {
   const { moodHistory } = useSong();

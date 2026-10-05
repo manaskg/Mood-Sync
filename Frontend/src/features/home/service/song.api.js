@@ -8,7 +8,7 @@ export const songApi = axios.create({
 });
 
 songApi.interceptors.request.use((config) => {
-  const token = localStorage.getItem("moodify_token");
+  const token = localStorage.getItem("moodsync_token") || localStorage.getItem("moodify_token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

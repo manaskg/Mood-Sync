@@ -58,7 +58,7 @@ export default function BrandLogo({ size = "md" }) {
             lineHeight: 1.1,
           }}
         >
-          Moodify
+          MoodSync
         </span>
         <span
           style={{
@@ -70,7 +70,7 @@ export default function BrandLogo({ size = "md" }) {
             display: "block",
           }}
         >
-          Emotion Audio AI
+          Acoustic Resonance
         </span>
       </div>
     </div>

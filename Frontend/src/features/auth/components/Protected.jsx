@@ -56,7 +56,7 @@ const Protected = ({ children }) => {
           />
         </div>
         <p style={{ fontFamily: "var(--font-mono)", fontSize: "0.85rem", letterSpacing: "0.08em" }}>
-          INITIALIZING MOODIFY SESSION...
+          INITIALIZING MOODSYNC SESSION...
         </p>
       </div>
     );

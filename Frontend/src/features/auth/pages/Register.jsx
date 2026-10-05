@@ -36,7 +36,7 @@ const Register = () => {
     setSubmitting(false);
 
     if (result.success) {
-      navigate("/");
+      navigate("/detect");
     }
   }
 
@@ -47,8 +47,8 @@ const Register = () => {
       <div className="auth-card">
         <header className="auth-header">
           <BrandLogo size="lg" />
-          <h1>Join Moodify</h1>
-          <p>Experience real-time AI emotion music curation</p>
+          <h1>Join MoodSync</h1>
+          <p>Real-time facial expression music curation</p>
         </header>
 
         {activeError && (

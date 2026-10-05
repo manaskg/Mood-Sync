@@ -1,6 +1,6 @@
 import React from "react";
 import { useSong } from "../hooks/useSong";
-import { Play, Pause, Shuffle, MusicNotes, Sparkle, Clock } from "@phosphor-icons/react";
+import { Play, Pause, Shuffle, MusicNotes, Clock } from "@phosphor-icons/react";
 import "../style/playlist.scss";
 
 export default function PlaylistView() {
@@ -74,8 +74,8 @@ export default function PlaylistView() {
 
         <div className="playlist-hero__info">
           <div className="playlist-hero__eyebrow">
-            <Sparkle size={14} weight="fill" color="var(--accent-current)" />
-            <span>Curated Mood Playlist · {currentMeta.vibe}</span>
+            <MusicNotes size={14} weight="bold" color="var(--accent-current)" />
+            <span>Curated Mood Playlist: {currentMeta.vibe}</span>
           </div>
 
           <h1 className="playlist-hero__title">{currentMeta.name}</h1>
@@ -190,13 +190,13 @@ export default function PlaylistView() {
                   <div className="track-meta">
                     <span className="track-title">{track.title}</span>
                     <span className="track-artist">
-                      {track.artist || "Moodify Curated"}
+                      {track.artist || "MoodSync Curated"}
                     </span>
                   </div>
                 </div>
 
                 <div className="track-row__album">
-                  <span>{track.album || "Moodify Studio"}</span>
+                  <span>{track.album || "MoodSync Studio"}</span>
                 </div>
 
                 <div className="track-row__time tabular-nums">

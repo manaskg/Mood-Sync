@@ -6,7 +6,7 @@ import AllPlaylistsSection from "../components/AllPlaylistsSection";
 import MoodHistory from "../components/MoodHistory";
 import Player from "../components/Player";
 import { useSong } from "../hooks/useSong";
-import { Sparkle } from "@phosphor-icons/react";
+import { Waveform } from "@phosphor-icons/react";
 import "../style/home.scss";
 
 const Home = () => {
@@ -27,13 +27,12 @@ const Home = () => {
         {/* Intro Header */}
         <section className="home-hero-strip">
           <div className="hero-badge">
-            <Sparkle size={14} weight="fill" />
-            <span>Biometric Emotional Acoustics</span>
+            <Waveform size={14} weight="bold" />
+            <span>Emotion Studio</span>
           </div>
           <h1>Emotion-Aware Soundscapes</h1>
           <p>
-            Scan your facial expression with on-device computer vision to dynamically
-            generate and play curated playlists tailored to how you feel.
+            On-device facial analysis synchronizing acoustic playlists directly with your mood.
           </p>
         </section>
 

@@ -24,7 +24,7 @@ const Login = () => {
     });
     setSubmitting(false);
     if (result.success) {
-      navigate("/");
+      navigate("/detect");
     }
   }
 
@@ -39,7 +39,7 @@ const Login = () => {
     });
     setSubmitting(false);
     if (result.success) {
-      navigate("/");
+      navigate("/detect");
     }
   }
 
@@ -48,7 +48,7 @@ const Login = () => {
       <div className="auth-card">
         <header className="auth-header">
           <BrandLogo size="lg" />
-          <h1>Sign in to Moodify</h1>
+          <h1>Sign in to MoodSync</h1>
           <p>Emotion-driven acoustic soundscapes tuned to your face</p>
         </header>
 

@@ -1,7 +1,8 @@
 import React from "react";
 import BrandLogo from "../../shared/components/BrandLogo";
 import { useAuth } from "../../auth/hooks/useAuth";
-import { SignOut, User, Sparkle } from "@phosphor-icons/react";
+import { Link } from "react-router";
+import { SignOut, User } from "@phosphor-icons/react";
 import "../style/navbar.scss";
 
 export default function Navbar({ currentMood = "happy" }) {
@@ -10,13 +11,13 @@ export default function Navbar({ currentMood = "happy" }) {
   const getMoodBadge = (mood) => {
     switch (mood) {
       case "happy":
-        return { label: "Happy Mood", emoji: "😊", color: "var(--mood-happy)" };
+        return { label: "Happy", emoji: "😊" };
       case "sad":
-        return { label: "Sad Mood", emoji: "🌧️", color: "var(--mood-sad)" };
+        return { label: "Sad", emoji: "🌧️" };
       case "surprised":
-        return { label: "Surprised Mood", emoji: "⚡", color: "var(--mood-surprised)" };
+        return { label: "Surprised", emoji: "⚡" };
       default:
-        return { label: "Active", emoji: "✨", color: "var(--accent-current)" };
+        return { label: "Active", emoji: "✨" };
     }
   };
 
@@ -26,14 +27,24 @@ export default function Navbar({ currentMood = "happy" }) {
     <header className="moodify-navbar">
       <div className="moodify-navbar__inner">
         <div className="moodify-navbar__left">
-          <BrandLogo size="md" />
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <BrandLogo size="md" />
+          </Link>
         </div>
+
+        <nav className="moodify-navbar__nav-links">
+          <Link to="/" className="nav-link">
+            Overview
+          </Link>
+          <Link to="/detect" className="nav-link nav-link--active">
+            Studio
+          </Link>
+        </nav>
 
         <div className="moodify-navbar__center">
           <div className="mood-indicator-pill">
-            <span className="mood-indicator-dot" style={{ backgroundColor: badge.color }} />
             <span className="mood-emoji">{badge.emoji}</span>
-            <span className="mood-text">{badge.label} Soundscape</span>
+            <span className="mood-text">{badge.label} Vibe</span>
           </div>
         </div>
 
@@ -42,7 +53,7 @@ export default function Navbar({ currentMood = "happy" }) {
             <div className="user-avatar">
               <User size={16} weight="bold" />
             </div>
-            <span className="username">{user?.username || "Audience"}</span>
+            <span className="username">{user?.username || "Guest"}</span>
           </div>
 
           <button

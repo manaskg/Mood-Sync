@@ -1,6 +1,6 @@
 import React from "react";
 import { useSong } from "../hooks/useSong";
-import { Sparkle, Play, Check } from "@phosphor-icons/react";
+import { Play, Check } from "@phosphor-icons/react";
 
 export default function AllPlaylistsSection() {
   const { allPlaylists, currentMood, loadMoodPlaylist } = useSong();

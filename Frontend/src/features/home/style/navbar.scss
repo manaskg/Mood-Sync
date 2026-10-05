@@ -16,7 +16,30 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 1.5rem;
+  }
+
+  .moodify-navbar__nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+
+    .nav-link {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+
+      &:hover {
+        color: var(--text-primary);
+      }
+
+      &--active {
+        color: var(--accent-current);
+        font-weight: 600;
+      }
+    }
   }
 
   .moodify-navbar__center {
@@ -34,13 +57,6 @@
       font-size: 0.82rem;
       font-weight: 500;
       color: var(--text-primary);
-
-      .mood-indicator-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        box-shadow: 0 0 8px currentColor;
-      }
 
       .mood-emoji {
         font-size: 0.95rem;
