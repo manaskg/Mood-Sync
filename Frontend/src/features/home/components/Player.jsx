@@ -115,6 +115,13 @@ const Player = () => {
 
   return (
     <footer className="player-dock" aria-label="Music Player Control Bar">
+      {/* Top Hairline Progress Bar */}
+      <div
+        className="player-dock__top-progress"
+        style={{ width: `${progressPercent}%` }}
+        aria-hidden="true"
+      />
+
       <audio
         ref={audioRef}
         src={song.url}
@@ -157,7 +164,7 @@ const Player = () => {
           <div className="player-controls__buttons">
             <button
               type="button"
-              className={`ctrl-btn ${isShuffle ? "ctrl-btn--active" : ""}`}
+              className={`ctrl-btn ctrl-btn--shuffle ${isShuffle ? "ctrl-btn--active" : ""}`}
               onClick={toggleShuffle}
               title="Shuffle"
               aria-label="Shuffle playback"
@@ -167,7 +174,7 @@ const Player = () => {
 
             <button
               type="button"
-              className="ctrl-btn"
+              className="ctrl-btn ctrl-btn--seek-back"
               onClick={() => seekRelative(-10)}
               title="Skip back 10s"
               aria-label="Skip back 10 seconds"
@@ -177,7 +184,7 @@ const Player = () => {
 
             <button
               type="button"
-              className="ctrl-btn"
+              className="ctrl-btn ctrl-btn--prev"
               onClick={playPrev}
               title="Previous Track"
               aria-label="Previous Track"
@@ -197,7 +204,7 @@ const Player = () => {
 
             <button
               type="button"
-              className="ctrl-btn"
+              className="ctrl-btn ctrl-btn--next"
               onClick={playNext}
               title="Next Track"
               aria-label="Next Track"
@@ -207,7 +214,7 @@ const Player = () => {
 
             <button
               type="button"
-              className="ctrl-btn"
+              className="ctrl-btn ctrl-btn--seek-fwd"
               onClick={() => seekRelative(10)}
               title="Skip forward 10s"
               aria-label="Skip forward 10 seconds"
@@ -217,7 +224,7 @@ const Player = () => {
 
             <button
               type="button"
-              className={`ctrl-btn ${isRepeat ? "ctrl-btn--active" : ""}`}
+              className={`ctrl-btn ctrl-btn--repeat ${isRepeat ? "ctrl-btn--active" : ""}`}
               onClick={toggleRepeat}
               title="Repeat"
               aria-label="Repeat track"

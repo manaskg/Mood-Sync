@@ -228,7 +228,7 @@ export default function Landing() {
       <footer className="landing-footer">
         <div className="landing-footer__inner">
           <BrandLogo size="md" />
-          <p>MoodSync - Built for portfolio presentation. All rights reserved.</p>
+          <p>MoodSync - All rights reserved.</p>
         </div>
       </footer>
     </div>

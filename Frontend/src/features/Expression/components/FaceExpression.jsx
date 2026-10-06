@@ -191,7 +191,7 @@ export default function FaceExpression({ activeMood = "happy", onMoodDetected = 
       <div className="telemetry-row">
         <div className="metric-pill">
           <div className="metric-pill__label">
-            <span>Smile Valence</span>
+            <span>Smile</span>
             <span className="tabular-nums">{telemetry.smile}%</span>
           </div>
           <div className="metric-pill__bar">
@@ -204,7 +204,7 @@ export default function FaceExpression({ activeMood = "happy", onMoodDetected = 
 
         <div className="metric-pill">
           <div className="metric-pill__label">
-            <span>Awe / Surprise</span>
+            <span>Surprise</span>
             <span className="tabular-nums">{telemetry.surprise}%</span>
           </div>
           <div className="metric-pill__bar">
