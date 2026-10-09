@@ -23,33 +23,29 @@
   .home-hero-strip {
     display: flex;
     flex-direction: column;
-    gap: 0.35rem;
-    padding: 0.25rem 0;
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-size: 0.72rem;
-      font-family: var(--font-mono);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--accent-current);
-    }
+    gap: 0.2rem;
+    padding: 0.15rem 0;
 
     h1 {
-      font-size: clamp(1.45rem, 4.5vw, 2.6rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
+      font-size: clamp(1.15rem, 3.5vw, 1.6rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
       color: var(--text-primary);
-      line-height: 1.15;
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+
+      svg {
+        color: var(--accent-current);
+        flex-shrink: 0;
+      }
     }
 
     p {
       color: var(--text-secondary);
-      font-size: clamp(0.85rem, 2vw, 0.96rem);
-      max-width: 65ch;
-      line-height: 1.5;
+      font-size: clamp(0.82rem, 2vw, 0.88rem);
+      line-height: 1.4;
     }
   }
 

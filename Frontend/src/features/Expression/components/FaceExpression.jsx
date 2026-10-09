@@ -12,11 +12,6 @@ export default function FaceExpression({ activeMood = "happy", onMoodDetected = 
   const [cameraActive, setCameraActive] = useState(true);
   const [cameraError, setCameraError] = useState(null);
   const [isScanning, setIsScanning] = useState(false);
-  const [telemetry, setTelemetry] = useState({
-    smile: activeMood === "happy" ? 85 : 12,
-    surprise: activeMood === "surprised" ? 92 : 8,
-    frown: activeMood === "sad" ? 78 : 5,
-  });
 
   // Initialize camera and MediaPipe
   useEffect(() => {
@@ -84,9 +79,7 @@ export default function FaceExpression({ activeMood = "happy", onMoodDetected = 
         setExpression: (exp) => {
           setExpression(exp);
         },
-        setMetrics: (metrics) => {
-          setTelemetry(metrics);
-        },
+        setMetrics: () => {},
       });
 
       setIsScanning(false);
@@ -103,9 +96,6 @@ export default function FaceExpression({ activeMood = "happy", onMoodDetected = 
 
   const handleManualMoodSelect = (mood) => {
     setExpression(mood);
-    if (mood === "happy") setTelemetry({ smile: 92, surprise: 15, frown: 4 });
-    if (mood === "sad") setTelemetry({ smile: 6, surprise: 10, frown: 84 });
-    if (mood === "surprised") setTelemetry({ smile: 25, surprise: 94, frown: 8 });
     onMoodDetected(mood);
   };
 
@@ -120,168 +110,84 @@ export default function FaceExpression({ activeMood = "happy", onMoodDetected = 
     }
   };
 
-  const getMoodEmoji = (mood) => {
-    switch (mood) {
-      case "happy":
-        return "😊";
-      case "sad":
-        return "🌧️";
-      case "surprised":
-        return "⚡";
-      default:
-        return "✨";
-    }
-  };
-
-  const getMoodVibe = (mood) => {
-    switch (mood) {
-      case "happy":
-        return "High Energy · Euphoric Vibes";
-      case "sad":
-        return "Deep Reflection · Solitude Melody";
-      case "surprised":
-        return "Astounding · Electric Shockwaves";
-      default:
-        return "Harmonic Resonance";
-    }
-  };
+  const cameraOnline = cameraActive && !cameraError;
 
   return (
     <section className="expression-studio" aria-label="AI Face Emotion Scanner">
-      <header className="expression-studio__header">
-        <div className="expression-studio__title-wrap">
-          <h2>
-            <Scan size={20} weight="bold" />
-            Facial Emotion Scanner
-          </h2>
-          <p>On-device facial analysis to select your playlist</p>
-        </div>
-        <div className="expression-studio__status-badge">
-          <span>{cameraActive && !cameraError ? "Camera Online" : "Manual Mode"}</span>
-        </div>
-      </header>
-
-      {/* Camera Viewport with clean HUD frame */}
-      <div className="expression-studio__viewport-wrapper">
-        {cameraActive && !cameraError ? (
+      {/* Camera Viewport */}
+      <div className="expression-studio__viewport">
+        {cameraOnline ? (
           <>
             <video ref={videoRef} playsInline muted autoPlay />
-            <div className="scanner-overlay">
-              <span className="reticle-corner reticle-corner--tl" />
-              <span className="reticle-corner reticle-corner--tr" />
-              <span className="reticle-corner reticle-corner--bl" />
-              <span className="reticle-corner reticle-corner--br" />
-              <div className="laser-line" />
+            <div className="viewport__scan-frame">
+              <span className="corner corner--tl" />
+              <span className="corner corner--tr" />
+              <span className="corner corner--bl" />
+              <span className="corner corner--br" />
             </div>
+            {isScanning && <div className="viewport__laser" />}
           </>
         ) : (
-          <div className="camera-offline-msg">
-            <CameraSlash size={40} weight="light" color="var(--text-muted)" />
-            <h3>Camera Sensor Offline</h3>
+          <div className="viewport__offline">
+            <CameraSlash size={32} weight="light" />
             <p>
               {cameraError
-                ? "Camera permission blocked or unavailable. You can use the instant mood selector below."
-                : "Camera is currently paused. Toggle on to re-enable live facial tracking."}
+                ? "Camera unavailable — select your mood below"
+                : "Camera paused"}
             </p>
           </div>
         )}
+
+        {/* Camera toggle overlaid on viewport */}
+        <button
+          type="button"
+          className="viewport__cam-toggle"
+          onClick={toggleCamera}
+          aria-label={cameraActive ? "Turn off camera" : "Turn on camera"}
+        >
+          {cameraActive ? <CameraSlash size={16} /> : <Camera size={16} />}
+        </button>
       </div>
 
-      {/* Real-time telemetry metrics */}
-      <div className="telemetry-row">
-        <div className="metric-pill">
-          <div className="metric-pill__label">
-            <span>Smile</span>
-            <span className="tabular-nums">{telemetry.smile}%</span>
-          </div>
-          <div className="metric-pill__bar">
-            <div
-              className="bar-fill"
-              style={{ width: `${telemetry.smile}%`, backgroundColor: "var(--mood-happy)" }}
-            />
-          </div>
-        </div>
+      {/* Primary Action */}
+      <button
+        type="button"
+        className="btn btn--primary btn--lg expression-studio__scan-btn"
+        onClick={handleScan}
+        disabled={isScanning}
+      >
+        <Scan size={18} weight="bold" />
+        {isScanning ? "Scanning…" : "Detect Mood"}
+      </button>
 
-        <div className="metric-pill">
-          <div className="metric-pill__label">
-            <span>Surprise</span>
-            <span className="tabular-nums">{telemetry.surprise}%</span>
-          </div>
-          <div className="metric-pill__bar">
-            <div
-              className="bar-fill"
-              style={{ width: `${telemetry.surprise}%`, backgroundColor: "var(--mood-surprised)" }}
-            />
-          </div>
-        </div>
-
-        <div className="metric-pill">
-          <div className="metric-pill__label">
-            <span>Melancholy</span>
-            <span className="tabular-nums">{telemetry.frown}%</span>
-          </div>
-          <div className="metric-pill__bar">
-            <div
-              className="bar-fill"
-              style={{ width: `${telemetry.frown}%`, backgroundColor: "var(--mood-sad)" }}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Studio Controls */}
-      <div className="studio-controls">
-        <div className="actions-row">
+      {/* Quick Mood Selector */}
+      <div className="expression-studio__moods">
+        <span className="moods__label">or pick manually</span>
+        <div className="moods__chips">
           <button
             type="button"
-            className="btn btn--primary btn--lg btn-scan"
-            onClick={handleScan}
-            disabled={isScanning}
+            className={`mood-chip${expression === "happy" ? " mood-chip--active" : ""}`}
+            onClick={() => handleManualMoodSelect("happy")}
           >
-            <Scan size={20} weight="bold" />
-            {isScanning ? "Analyzing Face..." : "Capture & Match Mood"}
+            <Smiley size={16} weight={expression === "happy" ? "fill" : "regular"} />
+            Happy
           </button>
-
           <button
             type="button"
-            className="btn btn--secondary btn--lg"
-            onClick={toggleCamera}
-            aria-label={cameraActive ? "Turn off camera" : "Turn on camera"}
+            className={`mood-chip${expression === "sad" ? " mood-chip--active" : ""}`}
+            onClick={() => handleManualMoodSelect("sad")}
           >
-            {cameraActive ? <CameraSlash size={20} /> : <Camera size={20} />}
-            <span>{cameraActive ? "Pause Cam" : "Enable Cam"}</span>
+            <SmileySad size={16} weight={expression === "sad" ? "fill" : "regular"} />
+            Sad
           </button>
-        </div>
-
-        {/* Quick Mood Override Selector */}
-        <div className="quick-mood-strip">
-          <span className="quick-mood-label">Instant Mood Selector (One-Click)</span>
-          <div className="mood-chips-row">
-            <button
-              type="button"
-              className={`mood-chip ${expression === "happy" ? "mood-chip--active" : ""}`}
-              onClick={() => handleManualMoodSelect("happy")}
-            >
-              <Smiley size={18} weight={expression === "happy" ? "fill" : "regular"} />
-              <span>Happy</span>
-            </button>
-            <button
-              type="button"
-              className={`mood-chip ${expression === "sad" ? "mood-chip--active" : ""}`}
-              onClick={() => handleManualMoodSelect("sad")}
-            >
-              <SmileySad size={18} weight={expression === "sad" ? "fill" : "regular"} />
-              <span>Sad</span>
-            </button>
-            <button
-              type="button"
-              className={`mood-chip ${expression === "surprised" ? "mood-chip--active" : ""}`}
-              onClick={() => handleManualMoodSelect("surprised")}
-            >
-              <Lightning size={18} weight={expression === "surprised" ? "fill" : "regular"} />
-              <span>Surprised</span>
-            </button>
-          </div>
+          <button
+            type="button"
+            className={`mood-chip${expression === "surprised" ? " mood-chip--active" : ""}`}
+            onClick={() => handleManualMoodSelect("surprised")}
+          >
+            <Lightning size={16} weight={expression === "surprised" ? "fill" : "regular"} />
+            Surprised
+          </button>
         </div>
       </div>
     </section>

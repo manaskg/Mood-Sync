@@ -26,14 +26,11 @@ const Home = () => {
       <main className="home-main">
         {/* Intro Header */}
         <section className="home-hero-strip">
-          <div className="hero-badge">
-            <Waveform size={14} weight="bold" />
-            <span>Emotion Studio</span>
-          </div>
-          <h1>Emotion-Aware Soundscapes</h1>
-          <p>
-            On-device facial analysis synchronizing acoustic playlists directly with your mood.
-          </p>
+          <h1>
+            <Waveform size={18} weight="bold" />
+            Emotion Studio
+          </h1>
+          <p>Detect your mood, get matched playlists.</p>
         </section>
 
         {/* 2-Column Split: Vision Studio & Playlist View */}
